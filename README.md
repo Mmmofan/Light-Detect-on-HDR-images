@@ -13,3 +13,16 @@ The algorithm of detect the light is self-design and some parameters can be fixe
 Any suggestion or advice is welcomed
 
 I'm a new conqueror of coding, hope I can do bette
+
+------------------------------------------Descriptions Below------------------------------------------------------------
+
+Four(4) Matrix file is created by my last C++ program(my last repository)
+
+The processes are as below:
+    1st: Read images which created by HDR process in C++ (HDR_Left.jpg && HDR_Right.jpg)
+    2nd: Get Matrix of these 4 files, and transit to ndarray, use file [ getMatrix.py ]
+    3rd: Undistort images use [ undistort,py ]
+    4th: Transit gray images into dark/white (I defined this) use [ grayImage.py ]
+    5th: Use kernel to calculate images value and get results use [ kernelConv.py ], which based on kernel set through [ setKernel.py ]
+    6th: There should be 6th step to calculate the distance, but it has not done yet.
+ 
