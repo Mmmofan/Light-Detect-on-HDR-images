@@ -5,6 +5,7 @@ import getMatrix
 import undistort
 import grayImage
 import kernelConv
+import distanceCalculate
 
 def main():
 ##Images Reading
@@ -22,9 +23,12 @@ def main():
     imageRight = grayImage.transToGray(imageRight)
     print('images gray')
 ##detect bright points
-    kernelConv.kernelConvLeft(imageLeft)
-    kernelConv.kernelConvRight(imageRight)
+    point1 = kernelConv.kernelConvLeft(imageLeft)
+    point2 = kernelConv.kernelConvRight(imageRight)
     print('images convolution')
+##calculate the distance
+    distance = distanceCalculate.distanceCalculate(point1, point2)
+    print('distance is: ', distance)
 
 if __name__ == "__main__":
     main()
