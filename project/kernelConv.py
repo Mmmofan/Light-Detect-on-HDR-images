@@ -12,7 +12,6 @@ def kernelConvLeft(image):
     x, y = np.meshgrid(x, y)
     z = setKernel.setKernel(x, y)
     K = z.reshape(19,19)
-
     i = 0
     j = 0
     resMatrix = np.array([[0,0]])
@@ -25,6 +24,8 @@ def kernelConvLeft(image):
                 #print("i: ",i," j: ",j," newnum: ",newnum)
                 temp = np.array([j,i])
                 resMatrix = np.row_stack((resMatrix, temp))
+            j += 2
+        i += 2
     matIndex = resMatrix.shape
     #print(matIndex)
     resMatrix = np.delete(resMatrix, 0, 0)
@@ -34,12 +35,15 @@ def kernelConvLeft(image):
     p1y = rowmin[1]
     p2x = resMatrix[matIndex[0]-2][0]
     p2y = rowmax[1]
-    print("Px:",(p1x+p2x)/2," Py:",(p1y+p2y)/2)
+    centerPoint_x = (p1x+p2x)/2
+    centerPoint_y = (p1y+p2y)/2
+    print("Px:",centerPoint_x," Py:", centerPoint_y)
     cv.rectangle(image, (p1x,p1y), (p2x,p2y),(0,0,0), 3)
     cv.imwrite("convImageLeft.jpg", image)
     #cv.imshow("image",image)
     #cv.waitKey(0)
     #cv.destroyAllWindows()
+    return [centerPoint_x, centerPoint_y]
 
 def kernelConvRight(image):
     H1,W1 = image.shape
@@ -68,9 +72,12 @@ def kernelConvRight(image):
     p1y = rowmin[1]
     p2x = resMatrix[matIndex[0]-2][0]
     p2y = rowmax[1]
-    print("Px:",(p1x+p2x)/2," Py:",(p1y+p2y)/2)
+    centerPoint_x = (p1x+p2x)/2
+    centerPoint_y = (p1y+p2y)/2
+    print("Px:", centerPoint_x," Py:", centerPoint_y)
     cv.rectangle(image, (p1x,p1y), (p2x,p2y),(0,0,0), 3)
     cv.imwrite("convImageRight.jpg", image)
     #cv.imshow("image",image)
     #cv.waitKey(0)
     #cv.destroyAllWindows()
+    return [centerPoint_x, centerPoint_y]
