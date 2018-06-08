@@ -1,4 +1,5 @@
 import os
+import time
 import numpy as np
 import cv2 as cv
 import getMatrix
@@ -8,6 +9,7 @@ import kernelConv
 import distanceCalculate
 
 def main():
+    start = time.clock()
 ##Images Reading
     imageLeft = cv.imread('HDR_Left.jpg',cv.IMREAD_GRAYSCALE)
     imageRight = cv.imread('HDR_Right.jpg', cv.IMREAD_GRAYSCALE)
@@ -29,6 +31,8 @@ def main():
 ##calculate the distance
     distance = distanceCalculate.distanceCalculate(point1, point2)
     print('distance is: ', distance)
+    end = time.clock()
+    print(end-start)
 
 if __name__ == "__main__":
     main()
