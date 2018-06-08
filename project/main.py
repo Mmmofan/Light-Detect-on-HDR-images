@@ -32,7 +32,7 @@ def main():
     distance = distanceCalculate.distanceCalculate(point1, point2)
     print('distance is: ', distance)
     end = time.clock()
-    print(end-start)
+    print("time cost: ", end-start)
 
 if __name__ == "__main__":
     main()

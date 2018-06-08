@@ -2,6 +2,8 @@
 
 School project
 
+Python3.5.4 + numpy, scipy, opencv2
+
 This is post-process when the stereo cameras are calibrated through my last repository
 
 This can detect the main light on the dark background, and ignore the small ones
