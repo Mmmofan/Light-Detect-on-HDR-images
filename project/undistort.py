@@ -8,7 +8,7 @@ def undistortLeft(img,mtx,dist):
     dst = cv.undistort(img, mtx, dist, dst, mtx)
     x, y, w, h = roi
     dst = dst[y:y+h, x:x+w]
-    cv.imwrite('undistortImageLeft.jpg',dst)
+    #cv.imwrite('undistortImageLeft.jpg',dst)
     #cv.imshow('result',dst)
     #cv.waitKey(0)
     #cv.destroyAllWindows()
@@ -22,7 +22,7 @@ def undistortRight(img,mtx,dist):
     dst = cv.undistort(img, mtx, dist, dst, mtx)
     x, y, w, h = roi
     dst = dst[y:y+h, x:x+w]
-    cv.imwrite('undistortImageRight.jpg',dst)
+    #cv.imwrite('undistortImageRight.jpg',dst)
     #cv.imshow('result',dst)
     #cv.waitKey(0)
     #cv.destroyAllWindows()

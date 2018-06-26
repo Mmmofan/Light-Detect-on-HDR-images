@@ -2,6 +2,7 @@ import cv2 as cv
 import numpy as np
 from scipy import signal
 import setKernel
+import time
 
 ##Use Kernel to calculate the bright points
 def kernelConvLeft(image):
@@ -12,10 +13,12 @@ def kernelConvLeft(image):
     x, y = np.meshgrid(x, y)
     z = setKernel.setKernel(x, y)
     K = z.reshape(19,19)
+
     i = 0
     j = 0
     resMatrix = np.array([[0,0]])
 ##convolution
+    tic = time.clock()
     for i in range(H1-20):
         for j in range(W1-20):
             newnum = K*((image[i:i+19, j:j+19])/255)
@@ -26,6 +29,9 @@ def kernelConvLeft(image):
                 resMatrix = np.row_stack((resMatrix, temp))
             j += 2
         i += 2
+    tac = time.clock()
+    time_spend = tac - tic
+    print("convolution time cost: ", time_spend, 's')
     matIndex = resMatrix.shape
     #print(matIndex)
     resMatrix = np.delete(resMatrix, 0, 0)
@@ -38,8 +44,8 @@ def kernelConvLeft(image):
     centerPoint_x = (p1x+p2x)/2
     centerPoint_y = (p1y+p2y)/2
     print("Px:",centerPoint_x," Py:", centerPoint_y)
-    cv.rectangle(image, (p1x,p1y), (p2x,p2y),(0,0,0), 3)
-    cv.imwrite("convImageLeft.jpg", image)
+    #cv.rectangle(image, (p1x,p1y), (p2x,p2y),(0,0,0), 3)
+    #cv.imwrite("convImageLeft.jpg", image)
     #cv.imshow("image",image)
     #cv.waitKey(0)
     #cv.destroyAllWindows()
@@ -55,6 +61,7 @@ def kernelConvRight(image):
     i = 0
     j = 0
     resMatrix = np.array([[0,0]])
+    tic = time.clock()
     for i in range(H1-20):
         for j in range(W1-20):
             newnum = K*((image[i:i+19, j:j+19])/255)
@@ -63,6 +70,8 @@ def kernelConvRight(image):
                 #print("i: ",i," j: ",j," newnum: ",newnum)
                 temp = np.array([j,i])
                 resMatrix = np.row_stack((resMatrix, temp))
+    tac = time.clock()
+    print("convolution time cost: ", tac-tic,'s')
     matIndex = resMatrix.shape
     #print(matIndex)
     resMatrix = np.delete(resMatrix, 0, 0)
@@ -75,8 +84,8 @@ def kernelConvRight(image):
     centerPoint_x = (p1x+p2x)/2
     centerPoint_y = (p1y+p2y)/2
     print("Px:", centerPoint_x," Py:", centerPoint_y)
-    cv.rectangle(image, (p1x,p1y), (p2x,p2y),(0,0,0), 3)
-    cv.imwrite("convImageRight.jpg", image)
+    #cv.rectangle(image, (p1x,p1y), (p2x,p2y),(0,0,0), 3)
+    #cv.imwrite("convImageRight.jpg", image)
     #cv.imshow("image",image)
     #cv.waitKey(0)
     #cv.destroyAllWindows()
