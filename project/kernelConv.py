@@ -1,6 +1,5 @@
-import cv2 as cv
+#import cv2 as cv
 import numpy as np
-from scipy import signal
 import setKernel
 import time
 
@@ -11,27 +10,17 @@ def kernelConvLeft(image):
     x = np.arange(0, 19, 1)
     y = np.arange(0, 19, 1)
     x, y = np.meshgrid(x, y)
-    z = setKernel.setKernel(x, y)
-    K = z.reshape(19,19)
-
-    i = 0
-    j = 0
+    K = setKernel.setKernel(x, y).reshape(19,19)
     resMatrix = np.array([[0,0]])
 ##convolution
-    tic = time.clock()
-    for i in range(H1-20):
-        for j in range(W1-20):
+    for i in range(0, H1-20, 4):
+        for j in range(0, W1-20, 4):
             newnum = K*((image[i:i+19, j:j+19])/255)
             newnum = np.sum(newnum)
             if(newnum > 62.51):
                 #print("i: ",i," j: ",j," newnum: ",newnum)
                 temp = np.array([j,i])
                 resMatrix = np.row_stack((resMatrix, temp))
-            j += 2
-        i += 2
-    tac = time.clock()
-    time_spend = tac - tic
-    print("convolution time cost: ", time_spend, 's')
     matIndex = resMatrix.shape
     #print(matIndex)
     resMatrix = np.delete(resMatrix, 0, 0)
@@ -56,22 +45,16 @@ def kernelConvRight(image):
     x = np.arange(0, 19, 1)
     y = np.arange(0, 19, 1)
     x, y = np.meshgrid(x, y)
-    z = setKernel.setKernel(x, y)
-    K = z.reshape(19,19)
-    i = 0
-    j = 0
+    K = setKernel.setKernel(x, y).reshape(19,19)
     resMatrix = np.array([[0,0]])
-    tic = time.clock()
-    for i in range(H1-20):
-        for j in range(W1-20):
+    for i in range(0, H1-20, 4):
+        for j in range(0, W1-20, 4):
             newnum = K*((image[i:i+19, j:j+19])/255)
             newnum = np.sum(newnum)
             if(newnum > 62.51):
                 #print("i: ",i," j: ",j," newnum: ",newnum)
                 temp = np.array([j,i])
                 resMatrix = np.row_stack((resMatrix, temp))
-    tac = time.clock()
-    print("convolution time cost: ", tac-tic,'s')
     matIndex = resMatrix.shape
     #print(matIndex)
     resMatrix = np.delete(resMatrix, 0, 0)
