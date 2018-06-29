@@ -13,8 +13,8 @@ def kernelConvLeft(image):
     K = setKernel.setKernel(x, y).reshape(19,19)
     resMatrix = np.array([[0,0]])
 ##convolution
-    for i in range(0, H1-20, 4):
-        for j in range(0, W1-20, 4):
+    for i in range(0, H1-20, 5):
+        for j in range(0, W1-20, 5):
             newnum = K*((image[i:i+19, j:j+19])/255)
             newnum = np.sum(newnum)
             if(newnum > 62.51):
@@ -26,14 +26,14 @@ def kernelConvLeft(image):
     resMatrix = np.delete(resMatrix, 0, 0)
     rowmax = resMatrix.max(0)
     rowmin = resMatrix.min(0)
-    p1x = resMatrix[1][0]
-    p1y = rowmin[1]
-    p2x = resMatrix[matIndex[0]-2][0]
-    p2y = rowmax[1]
-    centerPoint_x = (p1x+p2x)/2
-    centerPoint_y = (p1y+p2y)/2
+    xmin = rowmin[0]
+    ymin = rowmin[1]
+    xmax = rowmax[0]
+    ymax = rowmax[1]
+    centerPoint_x = (xmin + xmax)/2
+    centerPoint_y = (ymin + ymax)/2
     print("Px:",centerPoint_x," Py:", centerPoint_y)
-    #cv.rectangle(image, (p1x,p1y), (p2x,p2y),(0,0,0), 3)
+    #cv.rectangle(image, (xmin,ymin), (xmax,ymax),(0,0,0), 3)
     #cv.imwrite("convImageLeft.jpg", image)
     #cv.imshow("image",image)
     #cv.waitKey(0)
@@ -47,8 +47,8 @@ def kernelConvRight(image):
     x, y = np.meshgrid(x, y)
     K = setKernel.setKernel(x, y).reshape(19,19)
     resMatrix = np.array([[0,0]])
-    for i in range(0, H1-20, 4):
-        for j in range(0, W1-20, 4):
+    for i in range(0, H1-20, 5):
+        for j in range(0, W1-20, 5):
             newnum = K*((image[i:i+19, j:j+19])/255)
             newnum = np.sum(newnum)
             if(newnum > 62.51):
@@ -60,14 +60,14 @@ def kernelConvRight(image):
     resMatrix = np.delete(resMatrix, 0, 0)
     rowmax = resMatrix.max(0)
     rowmin = resMatrix.min(0)
-    p1x = resMatrix[1][0]
-    p1y = rowmin[1]
-    p2x = resMatrix[matIndex[0]-2][0]
-    p2y = rowmax[1]
-    centerPoint_x = (p1x+p2x)/2
-    centerPoint_y = (p1y+p2y)/2
+    xmin = rowmin[0]
+    ymin = rowmin[1]
+    xmax = rowmax[0]
+    ymax = rowmax[1]
+    centerPoint_x = (xmin + xmax)/2
+    centerPoint_y = (ymin + ymax)/2
     print("Px:", centerPoint_x," Py:", centerPoint_y)
-    #cv.rectangle(image, (p1x,p1y), (p2x,p2y),(0,0,0), 3)
+    #cv.rectangle(image, (xmin,ymin), (xmax,ymax),(0,0,0), 3)
     #cv.imwrite("convImageRight.jpg", image)
     #cv.imshow("image",image)
     #cv.waitKey(0)
