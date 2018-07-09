@@ -1,4 +1,4 @@
-#import cv2 as cv
+import cv2 as cv
 import numpy as np
 import setKernel
 import time
@@ -15,8 +15,7 @@ def kernelConvLeft(image):
 ##convolution
     for i in range(0, H1-20, 5):
         for j in range(0, W1-20, 5):
-            newnum = K*((image[i:i+19, j:j+19])/255)
-            newnum = np.sum(newnum)
+            newnum = np.sum(K*((image[i:i+19, j:j+19])/255))
             if(newnum > 62.51):
                 #print("i: ",i," j: ",j," newnum: ",newnum)
                 temp = np.array([j,i])
@@ -49,8 +48,7 @@ def kernelConvRight(image):
     resMatrix = np.array([[0,0]])
     for i in range(0, H1-20, 5):
         for j in range(0, W1-20, 5):
-            newnum = K*((image[i:i+19, j:j+19])/255)
-            newnum = np.sum(newnum)
+            newnum = np.sum(K*((image[i:i+19, j:j+19])/255))
             if(newnum > 62.51):
                 #print("i: ",i," j: ",j," newnum: ",newnum)
                 temp = np.array([j,i])

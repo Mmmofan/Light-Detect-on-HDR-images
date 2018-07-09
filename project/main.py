@@ -33,9 +33,11 @@ def main():
 ##detect bright points
     conv_tic = time.clock()
     point1 = kernelConv.kernelConvLeft(imageLeft)
+    conv_tac1 = time.clock()
     point2 = kernelConv.kernelConvRight(imageRight)
-    conv_tac = time.clock()
-    print('images convolution time cost: ', conv_tac - conv_tic, 's')
+    conv_tac2 = time.clock()
+    print('Left images convolution time cost: ', conv_tac1 - conv_tic, 's')
+    print('Right images convolution time cost: ', conv_tac2 - conv_tac1, 's')
 ##calculate the distance
     #calc_tic = time.clock()
     distance = distanceCalculate.distanceCalculate(point1, point2)
