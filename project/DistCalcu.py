@@ -60,6 +60,7 @@ class DistCalcu(object):
         #cv.waitKey(0)
         #cv.destroyAllWindows()
         return dst
+
     def transToGray(self, image):
         image = np.array(image)
         image[image<210] = 0
