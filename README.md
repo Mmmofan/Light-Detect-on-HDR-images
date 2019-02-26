@@ -9,9 +9,11 @@ Any suggestion or advice is welcomed.
 
 ### How to use
 Run this code
+
 ```
-	python main.py
+python main.py
 ```
+
 and you will see the calculated distance.
 If you are using your own camera, after calibration I believe you will have some matrix files and you need to replace line11-14 in main.py with your own.
 In this repository, those four Matrix files are created by my last C++ program (see my last repository),
